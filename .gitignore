@@ -1,0 +1,7 @@
+.env
+.env.*
+*.env
+temp
+# Firebase service account
+notes-9fa9c-firebase-adminsdk-fbsvc-d293efc621.json
+*.firebase-adminsdk-*.json
