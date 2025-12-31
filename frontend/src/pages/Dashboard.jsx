@@ -137,17 +137,15 @@ function Dashboard() {
   useEffect(() => {
     if (selectedNote && (editTitle !== selectedNote.title || editContent !== selectedNote.content)) {
       setSaveStatus('unsaved');
-      
       if (autoSaveTimer) {
         clearTimeout(autoSaveTimer);
-
+      }
       const timer = setTimeout(() => {
         autoSaveNote();
       }, 1000);
-
       setAutoSaveTimer(timer);
     }
-
+    // Clean up timer on unmount or note change
     return () => {
       if (autoSaveTimer) {
         clearTimeout(autoSaveTimer);
