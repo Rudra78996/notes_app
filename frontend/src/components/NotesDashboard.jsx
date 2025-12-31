@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { createNote, getNotes, updateNote, deleteNote } from '../services/api';
 
 function NotesDashboard() {
+    const navigate = useNavigate();
   const { user } = useAuth();
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -147,7 +149,17 @@ function NotesDashboard() {
       {/* Notes Grid */}
       {notes.length === 0 ? (
         <div className="text-center py-16 bg-white rounded-lg shadow">
-          <div className="text-6xl mb-4">📝</div>
+          <button
+            type="button"
+            onClick={() => navigate('/')}
+            className="w-8 h-8 rounded-lg flex items-center justify-center mx-auto mb-4"
+          >
+            <img
+              src="/writing.png"
+              alt="Notes logo"
+              className="w-12 h-12 object-contain"
+            />
+          </button>
           <h3 className="text-xl font-semibold text-gray-700 mb-2">No notes yet</h3>
           <p className="text-gray-500 mb-6">Create your first note to get started</p>
           <button

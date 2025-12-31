@@ -2,9 +2,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { 
   signInWithEmailAndPassword, 
   signOut, 
-  onAuthStateChanged,
-  GoogleAuthProvider,
-  signInWithPopup
+  onAuthStateChanged
 } from 'firebase/auth';
 import { auth } from '../firebase';
 import { registerUser } from '../services/api';
@@ -71,27 +69,13 @@ export function AuthProvider({ children }) {
     }
   };
 
-  // Sign in with Google
-  const signInWithGoogle = async () => {
-    try {
-      setError(null);
-      const provider = new GoogleAuthProvider();
-      const userCredential = await signInWithPopup(auth, provider);
-      return userCredential.user;
-    } catch (err) {
-      setError(err.message);
-      throw err;
-    }
-  };
-
   const value = {
     user,
     loading,
     error,
     signUp,
     signIn,
-    logOut,
-    signInWithGoogle
+    logOut
   };
 
   return (
